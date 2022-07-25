@@ -1,0 +1,4 @@
+nishang -> Para hacer reverse_shell
+PowerSploit -> Un conjunto de herramientas para auditar la maquina entre otras
+WinPeas -> Escanear en busca de vulnerabilidades
+ConPtyShell -> Full tty Interactive

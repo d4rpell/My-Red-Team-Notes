@@ -1,0 +1,14 @@
+Local File Inclusion (LFI) [Abusing file_get_contents]
+Abusing No Redirect
+Forge PHPSESSID and getting valid Cookies
+Forge JWT
+Uploading WebShell
+Obtaining system credentials through the webshell
+Abusing Sticky Notes
+Binary Analysis (Radare2)
+SQL Injection (SQLI) [Error Based]
+AES Decrypt (Cyberchief)
+
+# Opinion
+
+Mucho Pentesting Web y muy interesante a la hora de pillar con el LFI los archivos PHP

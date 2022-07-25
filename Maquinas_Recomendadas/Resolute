@@ -1,0 +1,16 @@
+RPC Enumeration - Abusing querydispinfo
+CrackMapExec SMB Authentication Sprying
+Abusing WinRM - EvilWinRM
+Information Leakage
+LOLBAS
+Abusing DnsAdmins Group - dnscmd [Privilege Escalation]
+Creating a malicious DLL and injecting it into the dns service
+
+# Mi opinion
+
+Refuerzas las partes basicas para obtener usuarios de el rpcclient, y hay password_sprying, intento de asrepoasting attack y kerberoasting attack
+Explotamos un servicio gracias a estar en el grupo DnsAdmins
+
+# Resources
+// Dnscmd 
+https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/

@@ -1,0 +1,5 @@
+Como explotar JenKins, y tambien como explotar el privilegio SetImpersonatePrivilage(JuicyPotato)
+
+Opinion:
+
+Increible la forma de explotar el JuicyPotato y crearnos un usuario privilegiado para acceder con psexec.py

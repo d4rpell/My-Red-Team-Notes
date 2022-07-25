@@ -1,0 +1,2 @@
+sudo nmap -p- --open -sU --min-rate 10000 10.10.10.116 -n -vvv -oN allports
+sudo nmap -sU -p500 -sC -sV 10.10.10.116 -oN udpScan

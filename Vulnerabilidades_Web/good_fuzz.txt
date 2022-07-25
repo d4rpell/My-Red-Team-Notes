@@ -1,0 +1,7 @@
+# WFUZZ
+
+wfuzz -L -c --hc=404 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -z list,php-txt http://10.10.10.73/FUZZ.FUZ2Z
+
+# FUZZ
+
+ffuf -t 50 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e .php,.txt,.py,.sh,.html -u "http://10.10.10.25:8000/FUZZ" --mc all --fc 404

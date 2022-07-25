@@ -1,0 +1,2 @@
+program.sh &> /dev/null &
+disown

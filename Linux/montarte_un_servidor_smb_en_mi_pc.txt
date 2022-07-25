@@ -1,0 +1,2 @@
+mount -t cifs //10.10.10.182/Data /mnt/smbmounted (SIN NECESIDAD DE LOGIN)
+mount -t cifs //10.10.10.182/Data /mnt/smbmounted -o username=r.thompson,password=rY4n5eva,domain=cascade.local,rw (EN DOMAIN PODEMOS PONER WORKGROUP)

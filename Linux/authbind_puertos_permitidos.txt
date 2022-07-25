@@ -1,0 +1,7 @@
+Echo en la maquina Kotarak
+
+Si en un servidor existe la ruta /etc/authbind, tendremos que irnos a /etc/authbind/byport/ y nos saldran los puertos por los cuales estan 
+permitidos ponerte en escucha, para que esto funcione tendremos que ver que los permisos esten a nuestro usuario.
+
+Ejecucion:
+authbind python -m SimpleHTTPServer 80

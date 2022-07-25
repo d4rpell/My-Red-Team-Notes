@@ -1,0 +1,3 @@
+Linpeas -> Ver posibles fallos y tambien tareas en segundo plano
+/etc/crontab -> Ejecucion en 2plano de tareas chrome
+Procmon (https://github.com/d4rpell/Procmon) -> Mirar procesos de Linux 

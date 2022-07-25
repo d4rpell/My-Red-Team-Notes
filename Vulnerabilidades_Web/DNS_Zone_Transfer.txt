@@ -1,0 +1,18 @@
+[*] Sacar direccion de subdominio
+
+nslookup
+> server 10.10.10.13
+default server: 10.10.10.13
+Address: 10.10.10.13#53
+> 10.10.10.13
+13.10.10.10.in-addr.arpa	name = ns1.cronos.htb.
+
+[*] Obteniendo informacion del puerto 53
+
+dig @10.10.10.13 cronos.htb
+dig @10.10.10.13 cronos.htb mx --> Para obtener direcciones de correo
+dig @10.10.10.13 cronos.htb ANY --> Nos reporta todo
+
+[*] Ataque de transferencia de zona
+
+dig @10.10.10.13 cronos.htb axfr -> PARA MAS Subdominios

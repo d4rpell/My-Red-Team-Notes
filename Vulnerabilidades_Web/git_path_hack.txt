@@ -1,0 +1,3 @@
+Si descubrimos un .git en algun dominio, para recomponer los respositorios dentro tendremos que tener la herramienta GitHack en Github
+
+Y ya esta

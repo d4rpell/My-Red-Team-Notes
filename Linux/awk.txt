@@ -1,0 +1,2 @@
+awk 'NF{print $NF}' # Te filtra los ultimos
+awk '{print $2}' # Te filtra por el segundo separador

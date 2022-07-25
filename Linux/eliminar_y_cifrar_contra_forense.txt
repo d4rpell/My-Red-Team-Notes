@@ -1,0 +1,14 @@
+apt install scrub
+
+# Poner en binario el archivo para que si lo recuperan tenga que eatar cifrado
+scrub -p dod FILE
+
+# Borrar el archivo para que los forenses no puedan pillarlo
+shred -zun 10 FILE
+
+# Un streamer llamado s4vitar tiene una herramienta llamada rmk, esta usara estos dos comandos, este script te lo tendras que poner en la .zshrc o .bashrc
+
+function rmk(){
+	scrub -p dod $1
+	shred -zun 10 -v $1
+}

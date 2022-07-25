@@ -1,0 +1,9 @@
+Concepto entrenado en la maquina Altered
+
+Al hacer una peticion por el estilo de como nos sale en Altered, primero deberemos de cambiar su Request method para ver si aprueba POST
+
+En este caso no lo aprueba asi que cambiamos POST por GET, y vemos que si nos toma el formato de introduccion de las credenciales como POST
+Ahora cambiar a JSON el formato, y veremos que sigue funcionando
+Despues de esto, nos aprovechamos del llamado Type-Juggling, el cual en este caso hay un parametro que es el secret, el cual si lo modificas siempre saldra un error.
+Pero al poner en el secret un true en vez de el id puesto predeterminadamente, todo seguira bien, pero despues de esta accion en el campo id podremos meter una comilla y nos saldra error.
+Lo cual significa que es un SQLI

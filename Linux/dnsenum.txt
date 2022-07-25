@@ -1,0 +1,1 @@
+dnsenum --dnsserver 10.10.10.224 --threads 50 -f /opt/SecLists/Discovery/DNS/subdomainsPATH realcorp.htb{SERVER}

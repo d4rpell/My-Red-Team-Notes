@@ -1,0 +1,26 @@
+[Rpcclient lo utilizamos para poder ver los usuarios dentro del directorio activo]
+
+rpcclient -U "" 10.10.10.193 (Intentamos meternos sin credenciales validas)
+
+rpcclient -U 'user%password' 10.10.10.193 (nos metemos como usuarios validos)
+	Terminal : rpcclient $>	enumdomusers
+	Terminal : rpcclinet $> enumprinters (en el caso de que hubieses impresoras)
+
+# Mirar Info
+// Podriamos llegar a ver informacion critica como unas credenciales
+rpcclient -U '' 10.10.10.172 -N -c "querydispinfo"
+
+# Extraer todos los usuarios
+
+rpcclient -U "" 10.10.10.172 -N -c "enumdomusers" | grep -oP '\[.*?\]' | grep -v '0x' | tr -d '[]' > ../content/users.txt
+
+# Obtener el usuario que pertenece al Admin Group
+
+//Veremos que el grupo DomainsAdmin tiene el rid[0x200], que suelen ser las de el grupo Admin
+Comando -> rpcclient -U "" 10.10.10.169 -N -c "enumdomgroups"
+
+// Buscaremos por aquellos usuarios con la memoria rid de 0x200
+Comando -> rpcclient -U "" 10.10.10.169 -N -c "querygroupmem 0x200"
+
+// Nos saldra un usuario o varios que perteneceran al Domain Admin, en este caso sale en 0x1f4 asi que veremos su informacion
+Comando -> rpcclient -U "" 10.10.10.169 -N -c "queryuser 0x1f4"

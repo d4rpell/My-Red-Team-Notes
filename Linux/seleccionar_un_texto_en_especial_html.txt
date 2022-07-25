@@ -1,0 +1,1 @@
+curl -s -X GET "http://example.com" | html2text | grep "lo que queramos obetener del codigo html" | awk 'NF{print $NF}' | sort -u *NOS QUEDAMOS CON LA ULTIMA LINEA PERO SI FUESE LA SEGUNDA TENDRIAMOS QUE SUSTITUIR NF POR 2

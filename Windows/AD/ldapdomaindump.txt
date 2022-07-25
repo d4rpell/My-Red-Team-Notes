@@ -1,0 +1,2 @@
+{OBTENEMOS TODOS  LOS USUARIOS y GRUPOS ENTRE OTROS}
+ldapdomaindump -u 'intelligence.htb\Tiffany.Molina' -p 'NewIntelligenceCorpUser9876' 10.10.10.248

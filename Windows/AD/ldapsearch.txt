@@ -1,0 +1,1 @@
+ldapsearch -x -h 10.10.10.182 -b "dc=cascade,dc=local" (dc tienes que ponerlo para que te interprete el dominio --> cascade.local{dominio original})

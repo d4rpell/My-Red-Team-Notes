@@ -1,0 +1,7 @@
+// Video de s4vitar Celestial
+
+// Se basa en poder modificar las cookies que nos dan en base64, las modificamos para asi poder poner la data que nos de la gana.
+
+// Resource de la cual nos aprovechamos para meternos en el sistema
+
+https://opsecx.com/index.php/2017/02/08/exploiting-node-js-deserialization-bug-for-remote-code-execution/

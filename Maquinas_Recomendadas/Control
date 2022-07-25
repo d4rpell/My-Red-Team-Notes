@@ -1,0 +1,11 @@
+SQL Injection [SQLI] - Error Based
+Advanced Bash Scripting (EXTRA)
+SQLI to RCE (Into Outfile - PHP File Creation)
+ConPtyShell (Fully Interactive Reverse Shell for Windows)
+Playing with ScriptBlocks and PSCredential to execute commands as another user
+AppLocker Bypass
+WinPEAS Enumeration
+Service ImagePath Hijacking (Privilege Escalation)
+
+# Opinion 
+Subida de privilegios muy interesante tanto con los Scripts Blocks como con la reverse shell que ejectutamos con el servicio seclogon, AppLocker algo nuevo bastante interesante en contra del AV

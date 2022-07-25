@@ -1,0 +1,3 @@
+# Visitar ApplockerBypass en github para saber en que directorios meter programas sin que el AV lo detecte
+https://github.com/api0cradle/UltimateAppLockerByPassList
+https://github.com/api0cradle/UltimateAppLockerByPassList/blob/master/Generic-AppLockerbypasses.md

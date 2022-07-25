@@ -1,0 +1,6 @@
+# Maquina Static
+
+#Tendremos que meter un rango de ip por ejemplo 172.20.0.0/24 para que los rangos que nos dijo la maquina al estar conectados a traves de una vpn externa a la de hackthebox, que sea una vpn que la maquina te da, pues asi podriamos conseguir acceso a otras IPS
+
+ip route add 172.20.0.0/24
+ip route list # Veremos que se han metido algunas IPS a nuestro alcanze

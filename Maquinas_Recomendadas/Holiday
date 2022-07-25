@@ -1,0 +1,5 @@
+# Muy buena la verdad es que es muy recomendable para burlar en el XSS ya que la web nos defiende los <script> entre otros y buena para repasar SQLI
+SQL Injection - Sqlite
+XSS Injection - Bypassing Techniques (fromCharCode) + Own Javascript Code + Session Cookie Theft
+Abusing existing parameters - RCE
+NodeJS npm - Privilege Escalation

@@ -1,0 +1,6 @@
+Responder es un envenenador de  LLMNR, NBT-NS and MDNS poisoner, with built-in HTTP/SMB/MSSQL/FTP/LDAP rogue authentication server supporting NTLMv1/NTLMv2/LMv2, Extended Security NTLMSSP and Basic HTTP authentication. 
+
+[*EMPEZAR ENVENENAMIENTO*]
+responder -I tun0
+
+[VISTO EN LA MAQUINA DE HTB REEL2]

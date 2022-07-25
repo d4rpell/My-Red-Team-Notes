@@ -1,0 +1,1 @@
+for group in $(groups); do echo -e "\n[+] Listando archivos del sistema con grupo $group asignado:\n"; find / \-group $group 2>/dev/null; done

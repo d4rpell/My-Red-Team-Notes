@@ -1,0 +1,13 @@
+SMB Enumeration
+Eternalblue Exploitation (MS17-010) [Triple Z Exploit]
+Obtaining credentials stored in memory [MIMIKATZ + Windows Defender Evasion] (EXTRA)
+Enabling RDP from CrackMapExec (EXTRA)
+Windows Persistence techniques (EXTRA)
+Windows Persistence - Playing with debugger [When a user opens a program] (EXTRA)
+Windows Persistence - Playing with Gflags [When a user closes a program] (EXTRA)
+Windows Persistence - Playing with WMI Events [Executing tasks at regular intervals of time] (EXTRA)
+Persistence + Windows Defender Evasion [Playing with Ebowla] (EXTRA)
+
+# Opinion
+
+Aqui podemos ver muchas cosas como dumpear credenciales y haciendo persistencias de muchas maneras muy guapas

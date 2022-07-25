@@ -1,0 +1,5 @@
+1. Primero deberemos de importar nuestro path a la maquina por si no esta contemplado en el path de la maquina
+2. Tendremos que ejecutar el siguiente comando:
+
+COMMAND -> getcap -r / 2>/dev/null 
+

