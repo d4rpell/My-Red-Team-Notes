@@ -1,0 +1,8 @@
+# Maquina vista en Fulcrum
+# Montamos un disco X:, el cual tenga en mi caso el SYSVOL
+Get-SMBShare
+net use \\dc.fulcrum.local\IPC$ /user:FULCRUM\BTables ++FileServerLogon12345++
+
+net view \\dc.fulcrum.local\
+net use x: \\dc.fulcrum.local\SYSVOL /user:FULCRUM\Btables ++FileServerLogon12345++
+X:
