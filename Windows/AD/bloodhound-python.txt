@@ -1,0 +1,5 @@
+# Usamos bloodhound-python para obtener los .json de la victima, en el caso de que no podamos meternos dentro del sistema
+# Esto se aprovecha del kerberos para conseguir los .json, necesitamos credenciales validas que las podemos validar con kerbrute o con cme
+# Maquina practicada Mantis
+
+bloodhound-python -c All -u 'james' -p 'J@m3s_P@ssW0rd!' -ns 10.10.10.52 -d htb.local
