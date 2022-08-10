@@ -1,3 +1,4 @@
-Si descubrimos un .git en algun dominio, para recomponer los respositorios dentro tendremos que tener la herramienta GitHack en Github
+Si descubrimos un .git en algun dominio, para recomponer los respositorios dentro tendremos las siguientes herramientas
 
-Y ya esta
+https://github.com/arthaud/git-dumper
+https://github.com/lijiejie/GitHack
