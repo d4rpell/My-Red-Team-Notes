@@ -1,0 +1,1 @@
+[*] Usar clawsmail para conectarse por imap o pop3 a algun servidor
