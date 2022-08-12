@@ -9,7 +9,7 @@ https://docs.microsoft.com/en-us/sysinternals/downloads/procdump
 
 [*] Veremos que el proceso de firefox estara abierto
 
-  > ps | findstr firefo
+  > ps | findstr firefox
 
   [+] Output:
     401      36    49268      34248       2.52   5324   1 firefox
