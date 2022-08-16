@@ -1,0 +1,15 @@
+[*] Usaremos esta tecnica cuando tengamos privilegios para modificar el /etc/passwd
+
+[*] Al ver el /etc/passwd podremos ver los usuarios continuando de una x de esta forma
+
+  [+] Output:
+    root:x:
+
+[*] Tendremos que cambiar esa x por un hash de passwd, tendremos que crear una passwd con openssl
+
+  ~$> openssl passwd
+
+[*] Tendremos que dar una password, y ahora en /etc/passwd, tendremos que quitar esa x y meter el hash dado
+
+  [+] Output:
+    root:SciMHiysdNDQE:

@@ -1,0 +1,7 @@
+[*] Podremos ver que tipo de archivos podriamos modificar para poder obtener los privilegios
+
+  ~$> find / -writable 2>/dev/null 
+
+[*] Podremos hacer filtros para que no veamos programas de rutas que no nos interesen
+
+  ~$> find / -writable 2>/dev/null | grep -vE "/run|/dev|/tmp|/lib|/proc|/sys"

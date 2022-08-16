@@ -1,0 +1,4 @@
+[*] Primero deberemos de importar nuestro path a la maquina por si no esta contemplado en el path de la maquina
+[*] Tendremos que ejecutar el siguiente comando:
+
+	~$> getcap -r / 2>/dev/null 
