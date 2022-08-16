@@ -1,3 +1,0 @@
-# Escaneo completo con agresivo de plugins
-
-wpscan --url http://10.10.11.125/ -e p,u --api-token <TOKEN> --plugins-detection aggressive --disable-tls-checks
