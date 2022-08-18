@@ -1,0 +1,6 @@
+[*] Maquina Talkative
+
+[*] Usaremos cdk para poder obtener archivos en contenedor de la maquina principal, tendremos que estar en el container 172.17.0.3
+[*] cdk es un penetration tool para containers
+
+  ~$> ./cdk run cap-dac-read-search /root/root.txt
