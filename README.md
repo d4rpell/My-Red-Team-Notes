@@ -1,6 +1,6 @@
 # Contexto
 
-Un repaso de lo que he ido aprendiendo desde que empeze a aprendiendo Red-Team de una forma seria con 14 años.
+Un repaso de lo que he ido aprendiendo desde que empece a aprendiendo Red-Team de una forma seria con 14 años.
 Todo los documentos presentes pueden tener meses o años de antigüedad, tambien lo voy renovando segun lo que vaya aprendiendo de nuevos conceptos.
 
 Tambien hay otras cosas que he eliminado debido a la absurdez de algunos temas que tenia apuntados por lo cual he hecho una limpieza general de todos los documentos escritos por mi.
