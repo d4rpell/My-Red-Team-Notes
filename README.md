@@ -1,9 +1,8 @@
 # Contexto
 
-Un repaso de lo que he ido aprendiendo desde que empece aprendiendo Red-Team de una forma seria con 14 años.
-Todo los documentos presentes pueden tener meses o años de antigüedad, tambien lo voy renovando segun lo que vaya aprendiendo de nuevos conceptos.
+Un repaso de lo que he ido aprendiendo desde que empece aprendiendo Red-Team de una forma seria con 14 años. Todos los documentos presentes pueden tener meses o años de antigüedad, también lo voy renovando según lo que vaya aprendiendo de nuevos conceptos.
 
-Tambien hay otras cosas que he eliminado debido a la absurdez de algunos temas que tenia apuntados por lo cual he hecho una limpieza general de todos los documentos escritos por mi.
+También hay otras cosas que he eliminado debido a la absurdez de algunos temas que tenía apuntados por lo cual he hecho una limpieza general de todos los documentos escritos por mí.
 
 # Resources
 Mucha de la información aqui expuesta esta estudiada de paginas web como Hacktricks, PayloadAlltheThings entre otros.
