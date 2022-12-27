@@ -6,7 +6,7 @@ Todo los documentos presentes pueden tener meses o años de antigüedad, tambien
 Tambien hay otras cosas que he eliminado debido a la absurdez de algunos temas que tenia apuntados por lo cual he hecho una limpieza general de todos los documentos escritos por mi.
 
 # Resources
-Mucha de la informacion aqui expuesta esta estudiada de paginas web como Hacktricks, PayloadAlltheThings entre otros.
+Mucha de la información aqui expuesta esta estudiada de paginas web como Hacktricks, PayloadAlltheThings entre otros.
 
 - [PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [Hacktricks](https://book.hacktricks.xyz/welcome/readme)
