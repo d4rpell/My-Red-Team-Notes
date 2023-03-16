@@ -3,3 +3,4 @@ PowerSploit -> Un conjunto de herramientas para auditar la maquina entre otras
 WinPeas -> Escanear en busca de vulnerabilidades
 ConPtyShell -> Full tty Interactive
 LOLBAS -> https://lolbas-project.github.io/
+PetitPotam -> https://github.com/wh0amitz/PetitPotato
