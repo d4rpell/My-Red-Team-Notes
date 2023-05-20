@@ -5,6 +5,8 @@
 
 [Kerberos Attacks Kerberoasting](https://nored0x.github.io/red-teaming/Kerberos-Attacks-Kerbroasting/) by [Karim Habeeb](https://nored0x.github.io/)
 
+[ADCheatSheet](https://github.com/punishell/ADCheatSheet) by [punishell](https://github.com/punishell)
+
 ## XSS Threads **[Need Login]**
 
 [Hide your CobaltStrike like a PRO! & Bypass Kaspersky End Point Security AV/EDR (PART 2)](https://xss.is/threads/67273/) by r1z
