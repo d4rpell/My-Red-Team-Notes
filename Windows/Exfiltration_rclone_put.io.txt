@@ -1,0 +1,4 @@
+💥 "c:/temp/rclone.exe --config c:/temp/conf.txt copy \\FILESERVER\e$\ put:x -q --ignore-existing --auto-confirm --multi-thread-streams 10 --transfers 10 --checkers 10 --tpslimit 10 --max-size 1000M"
+https://put.io/ -> WB files upload
+https://rclone.org/putio/ -> rclone config
+https://twitter.com/1ZRR4H/status/1686095937658089472 -> twitter thread found
