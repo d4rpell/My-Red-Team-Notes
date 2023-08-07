@@ -11,6 +11,7 @@ Mucha de la información aqui expuesta esta estudiada de paginas web como Hacktr
 - [Hacktricks](https://book.hacktricks.xyz/welcome/readme)
 - [S4vitar_Channel](https://www.youtube.com/c/S4viOnLive/videos)
 - [S4vitar_Machines_Filter](https://htbmachines.github.io/)
+- [S4vitar Machines Filter Mejorada](https://infosecmachines.io/)
 
 # Profile
 See me on Hackthebox
