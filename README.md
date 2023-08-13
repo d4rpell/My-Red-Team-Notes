@@ -10,11 +10,11 @@ Much of the information here is taken from websites like Hacktricks, PayloadAllt
 
 - Self-taught
 - All webs I recopile on the README.md on each section.
-- PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
-- Hacktricks](https://book.hacktricks.xyz/welcome/readme)
+- [PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
+- [Hacktricks](https://book.hacktricks.xyz/welcome/readme)
 - [S4vitar_Channel](https://www.youtube.com/c/S4viOnLive/videos)
 - [S4vitar_Machines_Filter](https://htbmachines.github.io/)
-- S4vitar_Machines_Filter Enhanced](https://infosecmachines.io/)
+- [S4vitar_Machines_Filter Enhanced](https://infosecmachines.io/)
 
 ## Profile
 See me on Hackthebox
