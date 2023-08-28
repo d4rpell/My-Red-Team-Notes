@@ -16,6 +16,8 @@ Much of the information here is taken from websites like Hacktricks, PayloadAllt
 - [S4vitar_Machines_Filter](https://htbmachines.github.io/)
 - [S4vitar_Machines_Filter Enhanced](https://infosecmachines.io/)
 
+## OSCP Resources Interesting
+[OSCP-Tricks-2023](https://github.com/rodolfomarianocy/OSCP-Tricks-2023) by [rodolfomarianocy](https://github.com/rodolfomarianocy)
 ## Profile
 See me on Hackthebox
 - [HacktheBox_Profile](https://app.hackthebox.com/profile/376167)
