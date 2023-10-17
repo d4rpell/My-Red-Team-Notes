@@ -1,6 +1,8 @@
 # [Extra] Resources of Active Directory 🖥️👾🤓
 
 ## Resources
+[ACTIVE DIRECTORY](https://hideandsec.sh/books/cheatsheets-82c/page/active-directory) by [hideandsec](https://hideandsec.sh/)
+
 [Red Teaming Active Directory](https://h4ms1k.github.io/Red_Team_Active_Directory/#) by [h4ms1k](https://h4ms1k.github.io/)
 
 [Kerberos Attacks Kerberoasting](https://nored0x.github.io/red-teaming/Kerberos-Attacks-Kerbroasting/) by [Karim Habeeb](https://nored0x.github.io/)
@@ -32,3 +34,4 @@
 [Havoc C2](https://github.com/HavocFramework/Havoc) by [Havoc Framework](https://github.com/HavocFramework)
 
 [C2concealer](https://github.com/FortyNorthSecurity/C2concealer) by [FortyNorth Security](https://github.com/FortyNorthSecurity)
+
