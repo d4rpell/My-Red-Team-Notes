@@ -1,0 +1,8 @@
+ESXI Volume Encryption:
+
+You can mount it through rclone .Check out their documentation.  I did this with cloud storage.
+Link offhand: https://rclone.org/commands/rclone_mount/
+The virtual machine files are located in /vmfs/volumes, just pay attention that you only need to encrypt those folders to which there are links (shortcuts), otherwise you will kill the system.
+
+Contents of Volumes on the ESXI (ESXi01_Local, vmdata) are the volumes that should to crypt.
+https://raw.githubusercontent.com/d4rpell/My-Red-Team-Notes/main/Windows/AD/EXSI_Volumes.png
