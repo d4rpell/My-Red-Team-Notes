@@ -1,0 +1,10 @@
+To enable RDP from a command line via SMB access:
+
+1- reg add HKLM\System\CurrentControlSet\Services\TermService /v Start /t REG_DWORD /d 0x00000003 /f
+
+2- net start termservice
+----------------------------------
+CME:
+cme smb 192.168.1.1 -u user -p pass -M rdp
+
+Enables/Disables RDP
