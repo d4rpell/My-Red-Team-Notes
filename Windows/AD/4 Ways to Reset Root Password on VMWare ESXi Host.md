@@ -132,3 +132,12 @@ Reboot the host:
 `#reboot` 
 
 That's all, now we can log in to the ESXi host using a known password. I think someone will be interested. [Source](https://vmblog.ru/sbros-paroyal-root-v-vmware-esxi/)
+
+
+URLS SAVED OF THE BLOGS:
+[kak-vklyuchit-ssh-v-vmware-esxi-6-x](https://web.archive.org/web/20240519102802/https://vmblog.ru/kak-vklyuchit-ssh-v-vmware-esxi-6-x/)
+[root-na-vcenter-server-appliance-6-5](https://web.archive.org/web/20230201015324/https://vmblog.ru/kak-sbrosit-parol-root-na-vcenter-server-appliance-6-5/)
+[domain_group](https://web.archive.org/web/20230130151253/https://vmblog.ru/tipy-grupp-active-directory-kak-sozdat-novuyu/)
+[add to the group](https://web.archive.org/web/20230924074044/https://vmblog.ru/add-adgroupmember-dobavit-polzovatelya-v-gruppu-ad/)
+[Rufus booteable](https://web.archive.org/web/20231129051845/https://vmblog.ru/rufus-sozdaem-zagruzochnuyu-usb-fleshku-s-windows/)
+[use WinSCP to copy the file](https://web.archive.org/web/20231129061609/https://vmblog.ru/kopirovanie-fajlov-mezhdu-vmware-esxi-6-5-i-windows/)
