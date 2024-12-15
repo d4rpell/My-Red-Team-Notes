@@ -15,6 +15,10 @@
 
 [Interoperability With The Metasploit Framework](https://www.cobaltstrike.com/blog/interoperability-with-the-metasploit-framework)
 
+[AD Pentesting Resource Mayfly](https://mayfly277.github.io/archives/) by [Mayfly](https://mayfly277.github.io/)
+
+[AD Pentesting Resource Hacklido](https://hacklido.com/lists/6) by [hacklido](https://hacklido.com/)
+
 ## XSS Threads **[Need Login]**
 
 [Hide your CobaltStrike like a PRO! & Bypass Kaspersky End Point Security AV/EDR (PART 2)](https://xss.is/threads/67273/) by r1z
