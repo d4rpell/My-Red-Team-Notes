@@ -1,5 +1,10 @@
 # [Extra] Resources of Active Directory 🖥️👾🤓
 
+## UAC Bypass
+
+[UACME](https://github.com/hfiref0x/UACME) by [hfiref0x](https://github.com/hfiref0x)
+[WinPwnage](https://github.com/rootm0s/WinPwnage) by [rootm0s](https://github.com/rootm0s)
+
 ## Resources
 [ACTIVE DIRECTORY](https://hideandsec.sh/books/cheatsheets-82c/page/active-directory) by [hideandsec](https://hideandsec.sh/)
 
