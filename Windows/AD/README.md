@@ -8,6 +8,10 @@
 
 [UAC Bypass - methods and discussion](https://xss.is/threads/109310/)
 
+## EDR Bypass
+
+[Awesome EDR Bypass](https://github.com/tkmru/awesome-edr-bypass) by [tkmru](https://github.com/tkmru)
+
 ## Resources
 [ACTIVE DIRECTORY](https://hideandsec.sh/books/cheatsheets-82c/page/active-directory) by [hideandsec](https://hideandsec.sh/)
 
@@ -26,6 +30,8 @@
 [AD Pentesting Resource Mayfly](https://mayfly277.github.io/archives/) by [Mayfly](https://mayfly277.github.io/)
 
 [AD Pentesting Resource Hacklido](https://hacklido.com/lists/6) by [hacklido](https://hacklido.com/)
+
+[The Art of Exploiting Active Directory from Linux](https://gatari.dev/posts/the-art-of-exploiting-ad-from-linux/) by [zavier](https://gatari.dev/)
 
 ## XSS Threads **[Need Login]**
 
