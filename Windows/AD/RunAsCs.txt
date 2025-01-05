@@ -1,0 +1,12 @@
+RunAsCs download link: https://github.com/antonioCoco/RunasCs/releases
+
+Ways to use it on environments:
+
+https://sckull.github.io/posts/pov/#sedebugprivilege---runascsmeterpreter
+https://notes.benheater.com/books/active-directory/page/spawn-processes-as-other-users
+
+What is RunAsCs?
+RunAsCs spawn a new shell with different permissions, so If we have "SeImpersonatePrivilege False" on the Windows Machine what we're trying to privesc.
+We can use RunAsCs to spawn a new shell and see if that permission can change and exploit the JuicyPotatoNG.
+
+https://decoder.cloud/2022/09/21/giving-juicypotato-a-second-chance-juicypotatong/
