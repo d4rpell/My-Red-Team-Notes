@@ -13,3 +13,5 @@
 [XOR Strings Net](https://research.openanalysis.net/dotnet/xorstringsnet/agenttesla/2023/04/16/xorstringsnet.html) by [OALABS Research](https://research.openanalysis.net/)
 
 [Obfuscating a Mimikatz Downloader to Evade Defender (2024)](https://medium.com/@luisgerardomoret_69654/obfuscating-a-mimikatz-downloader-to-evade-defender-2024-b3a9098f0ae7) by [lainkusanagi](https://medium.com/@luisgerardomoret_69654)
+
+[SCORPIO-Crypter-Private-Windows-Defender-Bypass-Native-Net](https://github.com/Othsit/SCORPIO-Crypter-Private-Windows-Defender-Bypass-Native-Net) by [Othsit](https://github.com/Othsit)
